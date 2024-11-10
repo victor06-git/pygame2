@@ -108,6 +108,7 @@ def app_run():
 # Dibuixar
 def app_draw():
     screen.fill(WHITE)
+    
     # Draw buttons
     for button in buttons:
         draw_button(button)
