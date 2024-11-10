@@ -52,9 +52,13 @@ def app_draw():
     screen.fill(WHITE)
     utils.draw_grid(pygame, screen, 50)
     
-    # Dibuixar els cercles
-
-
+    x = 100 #posició x inicial
+    for cnt in range(0, 10):
+        radius = 10 + cnt * 2.5
+        # Dibuixar els cercles
+        pygame.draw.circle(screen, GRAY, (x,225), radius)
+        pygame.draw.circle(screen, BLUE, (x,225), radius, 3)
+        x += 50
     pygame.display.update()
 
 if __name__ == "__main__":
