@@ -19,7 +19,7 @@ clock = pygame.time.Clock()
 
 # Definir la finestra
 screen = pygame.display.set_mode((640, 480))
-pygame.display.set_caption('Window Title')
+pygame.display.set_caption('deures000')
 
 # Bucle de l'aplicació
 def main():
