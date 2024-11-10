@@ -19,12 +19,15 @@ clock = pygame.time.Clock()
 
 # Definir la finestra
 screen = pygame.display.set_mode((640, 480))
-pygame.display.set_caption('Window Title')
+pygame.display.set_caption('deures001')
 
 window_size = {
-    "width": 640,
-    "height": 480,
-    "center": None
+    "width": 0,
+    "height": 0,
+    "center": {
+        "x": 0,
+        "y": 0
+    }
      
 }
 
@@ -62,12 +65,35 @@ def app_run():
 def app_draw():
     screen.fill(WHITE)
     utils.draw_grid(pygame, screen, 50)
-
-    q_ample = q * 25 * perspective
-    q_alt = q * 20 * perspective
     
+    torn = 0
     for q in range(20, 0, -1):
-        pass
+        
+        perspective = (q/20)
+        
+        # ample i alt
+        q_ample = q * 25 * perspective
+        q_alt = q * 20 * perspective
+        
+        #coordenadas
+        x = window_size["center"]["x"] - (q_ample / 2)
+        y = window_size["center"]["y"] - (q_alt / 2)
+        width = q_ample
+        height = q_alt
+        
+        #colors
+        color_blue = (0, 0, q * 10) 
+        color_green = (0, q * 10, 0)
+
+        
+        if torn == 0:
+            #dibuix rectrangles 
+            pygame.draw.rect(screen, color_blue, (x, y, width, height))
+            torn = (torn + 1) % 2
+        else:
+            pygame.draw.rect(screen, color_green, (x, y, width, height))
+            torn = (torn + 1) % 2
+
     
     pygame.display.update()
 
