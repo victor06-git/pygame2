@@ -26,7 +26,7 @@ font = pygame.font.SysFont("Arial", 14)
 mouse_pos = {"x": -1, "y": -1, "pressed": False, "action": False}
 buttons = [
     {"value": "up", "x": 25, "y": 25, "width": 25, "height": 25, "pressed": False},
-    {"value": "down", "x": 25, "y": 25, "width": 25, "height": 25, "pressed": False}
+    {"value": "down", "x": 25, "y": 50, "width": 25, "height": 25, "pressed": False}
 ]
 direction = "up"
 position_y = 250
@@ -68,7 +68,6 @@ def app_events():
             mouse_pos["pressed"] = False
             mouse_pos["action"] = True
         
-
     return True
 
 # Fer càlculs
@@ -87,7 +86,7 @@ def app_run():
     mouse_pos["action"] = False
 
     delta_time = clock.get_time() / 1000.0
-    speed = 50
+    speed = 150
 
     if direction == "up":
         position_y = position_y - speed * delta_time
@@ -104,9 +103,8 @@ def app_run():
 
 # Dibuixar
 def app_draw():
-    global  position_y
     screen.fill(WHITE)
-    utils.draw_grid(pygame, screen, 50)
+    
 
     for button in buttons:
         draw_button(button)
@@ -131,5 +129,6 @@ def draw_button(button):
     rect = (button["x"], button["y"], button["width"], button["height"])
     pygame.draw.rect(screen, color, rect)
     pygame.draw.rect(screen, BLACK, rect, 2)
+
 if __name__ == "__main__":
     main()
