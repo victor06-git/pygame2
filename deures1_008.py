@@ -127,6 +127,7 @@ def app_draw():
 def draw_button(button):
 
     color = WHITE
+
     if button["pressed"]:
         color = ORANGE
     elif direction == button["value"]:
