@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import random
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
@@ -19,8 +21,9 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Definir la finestra
-screen = pygame.display.set_mode((640, 480))
-pygame.display.set_caption('deures006')
+screen = pygame.display.set_mode((640, 480), pygame.RESIZABLE)
+pygame.display.set_caption('Window Title')
+
 
 # Variables globals
 window_size = { 
@@ -47,6 +50,8 @@ board = []
 def main():
     is_looping = True
 
+    init_board()
+
     while is_looping:
         is_looping = app_events()
         app_run()
@@ -64,7 +69,7 @@ def app_events():
     mouse_inside = pygame.mouse.get_focused()
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: # Botó tancar finestra
+        if event.type == pygame.QUIT:
             return False
         elif event.type == pygame.MOUSEMOTION:
             if mouse_inside:
@@ -78,11 +83,12 @@ def app_events():
             cell_y = int((mouse_pos["y"] - board_pos["y"]) / CELL_SIZE)
 
             if 0 <= cell_x < len(board[0]) and 0 <= cell_y < len(board):
+                # Si la cel·la és buida, marca-la com a "W"
                 if board[cell_y][cell_x] == "":
                     board[cell_y][cell_x] = "W"
+                # Si conté una part de vaixell "S" marca com "B"
                 elif board[cell_y][cell_x] == "S":
-                    board[cell_y][cell_x]  == "B"
-
+                    board[cell_y][cell_x] = "B"
     return True
 
 # Fer càlculs
@@ -94,7 +100,7 @@ def app_run():
     window_size["center"]["x"] = int(screen.get_width() / 2)
     window_size["center"]["y"] = int(screen.get_height() / 2)
 
-    board_pos["x"] = window_size["center"]["x"] - int(len(board) * CELL_SIZE / 2)
+    board_pos["x"] = window_size["center"]["x"] - int(len(board[0]) * CELL_SIZE / 2)
     board_pos["y"] = window_size["center"]["y"] - int(len(board) * CELL_SIZE / 2)
 
 # Dibuixar
@@ -106,6 +112,7 @@ def app_draw():
 
     # Draw board
     draw_board()
+    
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
