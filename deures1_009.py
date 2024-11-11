@@ -19,6 +19,8 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('deures009')
 
+mouse_data = { "x": -1, "y": -1, "pressed": False, "released": False }
+
 # Bucle de l'aplicació
 def main():
     is_looping = True
@@ -36,7 +38,7 @@ def main():
 
 # Gestionar events
 def app_events():
-    global mouse_pos
+    global mouse_data
     mouse_inside = pygame.mouse.get_focused()
 
     for event in pygame.event.get():
@@ -44,7 +46,16 @@ def app_events():
             return False
         elif event.type == pygame.MOUSEMOTION:
             if mouse_inside:
-                mouse_pos["x"] = event.pos[0]    
+                mouse_data["x"] = event.pos[0]  
+                mouse_data["y"] = event.pos[1]
+            else:
+                mouse_data["x"] = -1
+                mouse_data["y"] = -1
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_data["pressed"] = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            mouse_data["released"] = True
+            mouse_data["pressed"] = True
     return True
 
 # Fer càlculs
