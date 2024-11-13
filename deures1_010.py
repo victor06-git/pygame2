@@ -18,6 +18,10 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('deures010')
 
+
+font_1 = pygame.font.SysFont("Arial", 14)
+font_2 = pygame.font.SysFont("Arial", 12)
+
 window_size = { 
     "width": 0, 
     "height": 0, 
@@ -27,8 +31,6 @@ window_size = {
     } 
 }
 
-font_1 = pygame.font.SysFont("Arial", 14)
-font_2 = pygame.font.SysFont("Arial", 12)
 
 level = 1
 mouse_pos = {"x": 300, "y": 250}
@@ -129,7 +131,11 @@ def extend_snake():
 # Afegeix un segment addicional a la cua de la serp copiant l'última posició de la cua actual.
 
 def move_snake(delta_time):
-    global level
+    global serp, level
+
+    if not snake["queue"]:
+        print("Error: Snake queue is empty!")
+        return
 
     xoc = utils.is_point_in_circle(snake["queue"][0], piece, piece["radius"])
     if xoc:
