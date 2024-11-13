@@ -54,6 +54,8 @@ piece = { # (manzana)
 def main():
     is_looping = True
 
+    init_game()
+    
     while is_looping:
         is_looping = app_events()
         app_run()
@@ -104,8 +106,10 @@ def init_game():
     global snake
 # Inicia el joc creant la primera peça si no existeix i col·locant la serp al centre de la pantalla.
     set_window_size() #Mida de la finestra
+    
     if piece["x"] == -1: #Si no existeix poma, creala
         generate_piece()
+
     #Es defineix la llista points de la snake amb la primera posició al centre de la pantalla.
     snake["points"] = []
     snake["queue"].append({'x': window_size["center"]["x"], 'y': window_size["center"]["y"]})
@@ -129,7 +133,7 @@ def extend_snake():
 # Afegeix un segment addicional a la cua de la serp copiant l'última posició de la cua actual.
 
 def move_snake(delta_time):
-    global serp, level
+    global  level
 
     if not snake["queue"]:
         print("Error: Snake queue is empty!")
@@ -138,10 +142,10 @@ def move_snake(delta_time):
     xoc = utils.is_point_in_circle(snake["queue"][0], piece, piece["radius"])
     if xoc:
         level += 1
-        snake["speed"] = snake["speed"] * 1.5 #Augmentar la velocitat de la serp
+        snake["speed"] = snake["speed"] * 1.05 #Augmentar la velocitat de la serp
         if snake["speed"] > 200:
             snake["speed"] = 200 #Limitar la velocitat de la serp
-        for cnt in range(piece['value']):
+        for _ in range(piece['value']):
             extend_snake()
         generate_piece()
 
@@ -227,7 +231,6 @@ def draw_piece():
     text_rect = text.get_rect(center=circle_coord)
     screen.blit(text, text_rect)
 # Dibuixa la peça actual a la pantalla en color vermell, incloent-hi el seu valor al centre de la peça.
-
-
+ 
 if __name__ == "__main__":
     main()
