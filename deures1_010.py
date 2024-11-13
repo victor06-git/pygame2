@@ -33,7 +33,7 @@ window_size = {
 
 
 level = 1
-mouse_pos = {"x": 300, "y": 250}
+mouse_pos = {"x": 325, "y": 200}
 
 snake = {
     "queue": [],
@@ -58,9 +58,7 @@ def main():
         is_looping = app_events()
         app_run()
         app_draw()
-
         clock.tick(60) # Limitar a 60 FPS
-
     # Fora del bucle, tancar l'aplicació
     pygame.quit()
     sys.exit()
