@@ -55,7 +55,7 @@ def main():
     is_looping = True
 
     init_game()
-    
+
     while is_looping:
         is_looping = app_events()
         app_run()
@@ -215,7 +215,7 @@ def draw_snake():
     for cnt in reversed(range(len(snake["queue"]))):
         circle = snake["queue"][cnt]
         if len(snake["queue"]) > 1:
-            lightness = int((cnt * 225) / (len(snake["queue"] - 1)))
+            lightness = int((cnt * 225) / (len(snake["queue"]) - 1))
         else:
             lightness = 0
         color = (lightness, lightness, lightness)
